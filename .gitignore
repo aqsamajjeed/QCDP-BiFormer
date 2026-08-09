@@ -1,0 +1,21 @@
+# Dataset Images
+Dataset/ODIR-5K/Training Images/
+Dataset/ODIR-5K/Testing Images/
+Dataset/preprocessed_images/
+
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model files
+*.pth
+*.pt
+*.h5
+*.keras
+
+# Temporary files
+.DS_Store
+Thumbs.db
