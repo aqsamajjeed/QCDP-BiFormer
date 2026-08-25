@@ -19,3 +19,12 @@ __pycache__/
 # Temporary files
 .DS_Store
 Thumbs.db
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables / secrets
+.env
+
+# Local downloaded BGE model
+RetinaAI_Prototype_V2_FINAL_FIXED/rag/bge_model/
