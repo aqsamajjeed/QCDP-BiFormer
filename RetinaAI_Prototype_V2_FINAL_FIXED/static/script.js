@@ -292,8 +292,11 @@ document.getElementById("newPredictionButton").addEventListener("click",()=>{
  document.getElementById("rightLabel").textContent="Select right-eye fundus image";
  document.getElementById("leftName").textContent="—";document.getElementById("rightName").textContent="—";
  document.getElementById("viewerState").textContent="Waiting";document.getElementById("viewerState").classList.remove("ready");
- document.getElementById("resultPanel").classList.add("hidden");document.getElementById("selectedPanel").classList.add("hidden");
- document.getElementById("bottomActions").classList.add("hidden");document.getElementById("chatPanel").classList.add("hidden");
+ document.getElementById("resultPanel").classList.add("hidden");
+ document.getElementById("selectedPanel").classList.add("hidden");
+ document.getElementById("bottomActions").classList.add("hidden");
+ document.getElementById("chatPanel").classList.add("hidden");
+ document.getElementById("chatHistory").innerHTML = "";
  document.getElementById("uploadPanel").classList.remove("hidden");
  const b=document.getElementById("analyzeButton");b.disabled=true;b.innerHTML='<i class="fa-solid fa-microscope"></i> Analyze Patient Images';
  window.scrollTo({top:0,behavior:"smooth"});
@@ -307,12 +310,20 @@ document.getElementById("closeChat").addEventListener("click",()=>document.getEl
 
 document.getElementById("sendQuestionButton").addEventListener("click", async () => {
 
-    const questionInput = document.getElementById("questionInput");
-    const sendButton = document.getElementById("sendQuestionButton");
-    const answerBox = document.getElementById("chatAnswerBox");
-    const answer = document.getElementById("chatAnswer");
+    const questionInput =
+        document.getElementById("questionInput");
 
-    const question = questionInput.value.trim();
+    const sendButton =
+        document.getElementById("sendQuestionButton");
+
+    const answerBox =
+        document.getElementById("chatAnswerBox");
+
+    const history =
+        document.getElementById("chatHistory");
+
+    const question =
+        questionInput.value.trim();
 
     if (!question) {
         alert("Please enter a question.");
@@ -320,10 +331,12 @@ document.getElementById("sendQuestionButton").addEventListener("click", async ()
     }
 
     const leftPrediction =
-        document.getElementById("chatLeftPrediction").textContent.trim();
+        document.getElementById("chatLeftPrediction")
+        .textContent.trim();
 
     const rightPrediction =
-        document.getElementById("chatRightPrediction").textContent.trim();
+        document.getElementById("chatRightPrediction")
+        .textContent.trim();
 
     sendButton.disabled = true;
 
@@ -332,49 +345,96 @@ document.getElementById("sendQuestionButton").addEventListener("click", async ()
 
     answerBox.classList.remove("hidden");
 
-    answer.innerHTML = "Generating answer...";
+    /* Create a new history item */
+    const historyItem =
+        document.createElement("div");
+
+    historyItem.className =
+        "chat-history-item";
+
+    historyItem.innerHTML = `
+        <div class="chat-history-question">
+            <i class="fa-regular fa-user"></i>
+            ${escapeHtml(question)}
+        </div>
+
+        <div class="chat-history-answer">
+            Generating answer...
+        </div>
+    `;
+
+    history.appendChild(historyItem);
+
+    /* Move the newest question into view */
+    historyItem.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
+
+    const answer =
+        historyItem.querySelector(
+            ".chat-history-answer"
+        );
 
     try {
 
         const response = await fetch("/ask", {
-            method: "POST",
+            method:"POST",
 
-            headers: {
-                "Content-Type": "application/json"
+            headers:{
+                "Content-Type":"application/json"
             },
 
-            body: JSON.stringify({
-                left_prediction: leftPrediction,
-                right_prediction: rightPrediction,
-                question: question
+            body:JSON.stringify({
+                left_prediction:leftPrediction,
+                right_prediction:rightPrediction,
+                question:question
             })
         });
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
         if (!response.ok) {
             throw new Error(
-                data.error || "Unable to get answer."
+                data.error ||
+                "Unable to get answer."
             );
         }
 
-        answer.innerHTML = formatMedicalReport(
-            data.answer || "No answer was returned."
-        );
+        answer.innerHTML =
+            formatMedicalReport(
+                data.answer ||
+                "No answer was returned."
+            );
+
+        /* Clear input for the next question */
+        questionInput.value = "";
 
     } catch (error) {
 
-        console.error("Question error:", error);
+        console.error(
+            "Question error:",
+            error
+        );
 
         answer.innerHTML =
-            `<strong>Error:</strong> ${error.message}`;
+            `<strong>Error:</strong> ${escapeHtml(error.message)}`;
 
     } finally {
 
-        // Re-enable Send button
         sendButton.disabled = false;
 
         sendButton.innerHTML =
             '<i class="fa-solid fa-paper-plane"></i> Send';
     }
 });
+
+function escapeHtml(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}

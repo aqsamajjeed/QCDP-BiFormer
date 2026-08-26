@@ -73,6 +73,34 @@ Return ONLY valid JSON in exactly this format:
     "left": "medical information for the left eye",
     "right": "medical information for the right eye"
 }}
+
+For EACH eye, format the answer exactly like this:
+
+### What it is
+Short explanation.
+
+### Symptoms / Signs
+- Point 1
+- Point 2
+- Point 3
+
+### Risk Factors
+- Point 1
+- Point 2
+
+### Detection
+Short explanation.
+
+### General Management
+- Point 1
+- Point 2
+
+### Important Note
+The prediction is not a confirmed diagnosis.
+
+Use Markdown headings and bullet points exactly as shown.
+Do not return the entire explanation as one paragraph.
+
 """
 
     try:
