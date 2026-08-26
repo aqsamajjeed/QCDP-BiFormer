@@ -1,108 +1,1521 @@
 *
 {
-    box-sizing:border-box;margin:0;padding:0
+    box-sizing:border-box;
+    margin:0;
+    padding:0
 }
+
 :root
 {
-    --navy:#203b51;--blue:#397d98;--bg:#f5f8f9;--border:#dfe8eb;--green:#e8f4f0}
+    --navy:#203b51;
+    --blue:#397d98;
+    --bg:#f5f8f9;
+    --border:#dfe8eb;
+    --green:#e8f4f0
+}
+
 body
 {
-    font-family:Inter,sans-serif;background:var(--bg);color:#29465a;min-height:100vh}
-button,input
+    font-family:Inter,sans-serif;
+    background:var(--bg);
+    color:#29465a;
+    min-height:100vh
+}
+
+button,
+input
 {
-    font:inherit}
+    font:inherit
+}
+
 .hidden
 {
-    display:none!important}
+    display:none!important
+}
+
+
+/* =========================================================
+   LEFT SIDEBAR
+   DO NOT CHANGE
+   ========================================================= */
+
 .sidebar
 {
-    position:fixed;left:0;top:0;bottom:0;width:246px;background:#fff;border-right:1px solid var(--border);
-    padding:25px 17px;display:flex;flex-direction:column;z-index:20}
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:246px;
+    background:#fff;
+    border-right:1px solid var(--border);
+    padding:25px 17px;
+    display:flex;
+    flex-direction:column;
+    z-index:20
+}
+
 .brand
 {
-    display:flex;align-items:center;gap:11px;padding:2px 8px 32px}
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:2px 8px 32px
+}
+
 .brand-mark
 {
-    width:40px;height:40px;border-radius:10px;background:#edf5f7;color:var(--blue);display:grid;place-items:center}
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:#edf5f7;
+    color:var(--blue);
+    display:grid;
+    place-items:center
+}
+
 .brand-name
 {
-    font:800 18px Manrope}
+    font:800 18px Manrope
+}
+
 .brand-subtitle
 {
-    font-size:10px;color:#8a99a2}
+    font-size:10px;
+    color:#8a99a2
+}
+
 .nav-title
 {
-    font-size:9px;font-weight:800;letter-spacing:1.2px;color:#9aa7ae;padding:0 12px 9px}
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    color:#9aa7ae;
+    padding:0 12px 9px
+}
+
 .nav-item
 {
-    width:100%;border:0;background:transparent;text-align:left;display:flex;gap:12px;padding:12px;border-radius:8px;margin-bottom:5px;color:#687985;font-size:12px;font-weight:600;cursor:pointer}.nav-item i{width:18px;text-align:center}.nav-item.active,.nav-item:hover{background:#edf5f7}.nav-item.active{color:var(--navy)}.nav-item.active i{color:var(--blue)}.sidebar-bottom{margin-top:auto}.prototype-status{display:flex;gap:10px;padding:13px;background:#f3f8f7;border:1px solid #dfebe8;border-radius:9px}.status-dot{width:8px;height:8px;border-radius:50%;background:#5da69a;margin-top:4px}.prototype-status strong{display:block;font-size:10px}.prototype-status small{display:block;font-size:9px;color:#87958f;margin-top:3px}.sidebar-meta{border-top:1px solid var(--border);margin-top:15px;padding:12px 7px 0;display:flex;justify-content:space-between;color:#9aa6ad;font-size:9px}
+    width:100%;
+    border:0;
+    background:transparent;
+    text-align:left;
+    display:flex;
+    gap:12px;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:5px;
+    color:#687985;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer
+}
+
+.nav-item i
+{
+    width:18px;
+    text-align:center
+}
+
+.nav-item.active,
+.nav-item:hover
+{
+    background:#edf5f7
+}
+
+.nav-item.active
+{
+    color:var(--navy)
+}
+
+.nav-item.active i
+{
+    color:var(--blue)
+}
+
+.sidebar-bottom
+{
+    margin-top:auto
+}
+
+.prototype-status
+{
+    display:flex;
+    gap:10px;
+    padding:13px;
+    background:#f3f8f7;
+    border:1px solid #dfebe8;
+    border-radius:9px
+}
+
+.status-dot
+{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#5da69a;
+    margin-top:4px
+}
+
+.prototype-status strong
+{
+    display:block;
+    font-size:10px
+}
+
+.prototype-status small
+{
+    display:block;
+    font-size:9px;
+    color:#87958f;
+    margin-top:3px
+}
+
+.sidebar-meta
+{
+    border-top:1px solid var(--border);
+    margin-top:15px;
+    padding:12px 7px 0;
+    display:flex;
+    justify-content:space-between;
+    color:#9aa6ad;
+    font-size:9px
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
 .main
 {
-    margin-left:246px;min-height:100vh}
+    margin-left:246px;
+    min-height:100vh
+}
+
 .page
 {
-    min-height:100vh}
+    min-height:100vh
+}
+
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
 .home-page
 {
-    position:relative;overflow:hidden;padding:54px 48px;background:#f7fafb}
-.home-background{position:absolute;inset:0;
-    background-image:url("image2.png");background-size:cover;background-position:center;opacity:.055}.home-background-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(247,250,251,.98),rgba(247,250,251,.92),rgba(247,250,251,.82))}.home-content{position:relative;z-index:2;max-width:1250px;margin:auto}.home-copy{max-width:760px;padding:10px 0 30px}.eyebrow{display:inline-flex;gap:8px;color:#427f91;background:#edf5f7;border:1px solid #d8e7eb;border-radius:5px;padding:7px 10px;font-size:9px;font-weight:800;letter-spacing:1px}.home-copy h1{font:800 clamp(38px,4.5vw,58px)/1.07 Manrope;color:var(--navy);margin-top:19px;letter-spacing:-1.8px}.home-copy h1 span{color:var(--blue)}.home-copy p{max-width:650px;margin-top:16px;color:#6d7e89;font-size:14px;line-height:1.7}.primary-button{border:0;border-radius:7px;background:var(--blue);color:white;padding:12px 17px;font-size:12px;font-weight:700;cursor:pointer}.primary-button:hover{background:#306b83}.primary-button i{margin-right:7px}.supported-header{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--border);padding-bottom:11px;margin-bottom:14px}.supported-header>div>span,.mini-label,.disease-detail>span{font-size:9px;font-weight:800;letter-spacing:1px;color:#83939d}.supported-header h2{font:700 18px Manrope;margin-top:4px}.supported-header small{font-size:9px;color:#99a5ab}.disease-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.disease-card{background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden}.disease-card img{width:100%;height:105px;object-fit:cover;background:#eaf2f4}.disease-card>div{padding:9px 10px 11px}.disease-card strong{display:block;font-size:11px}.disease-card small{display:block;color:#8998a1;font-size:8.5px;margin-top:4px}.disclaimer{display:flex;gap:7px;color:#89979e;font-size:9px;margin-top:16px}
+    position:relative;
+    overflow:hidden;
+    padding:54px 48px;
+    background:#f7fafb
+}
+
+.home-background
+{
+    position:absolute;
+    inset:0;
+    background-image:url("image2.png");
+    background-size:cover;
+    background-position:center;
+    opacity:.055
+}
+
+.home-background-overlay
+{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(247,250,251,.98),
+        rgba(247,250,251,.92),
+        rgba(247,250,251,.82)
+    )
+}
+
+.home-content
+{
+    position:relative;
+    z-index:2;
+    max-width:1250px;
+    margin:auto
+}
+
+.home-copy
+{
+    max-width:760px;
+    padding:10px 0 30px
+}
+
+.eyebrow
+{
+    display:inline-flex;
+    gap:8px;
+    color:#427f91;
+    background:#edf5f7;
+    border:1px solid #d8e7eb;
+    border-radius:5px;
+    padding:7px 10px;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px
+}
+
+.home-copy h1
+{
+    font:800 clamp(38px,4.5vw,58px)/1.07 Manrope;
+    color:var(--navy);
+    margin-top:19px;
+    letter-spacing:-1.8px
+}
+
+.home-copy h1 span
+{
+    color:var(--blue)
+}
+
+.home-copy p
+{
+    max-width:650px;
+    margin-top:16px;
+    color:#6d7e89;
+    font-size:14px;
+    line-height:1.7
+}
+
+.primary-button
+{
+    border:0;
+    border-radius:7px;
+    background:var(--blue);
+    color:white;
+    padding:12px 17px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer
+}
+
+.primary-button:hover
+{
+    background:#306b83
+}
+
+.primary-button i
+{
+    margin-right:7px
+}
+
+.supported-header
+{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    border-bottom:1px solid var(--border);
+    padding-bottom:11px;
+    margin-bottom:14px
+}
+
+.supported-header>div>span,
+.mini-label,
+.disease-detail>span
+{
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:#83939d
+}
+
+.supported-header h2
+{
+    font:700 18px Manrope;
+    margin-top:4px
+}
+
+.supported-header small
+{
+    font-size:9px;
+    color:#99a5ab
+}
+
+.disease-grid
+{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px
+}
+
+.disease-card
+{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:9px;
+    overflow:hidden
+}
+
+.disease-card img
+{
+    width:100%;
+    height:105px;
+    object-fit:cover;
+    background:#eaf2f4
+}
+
+.disease-card>div
+{
+    padding:9px 10px 11px
+}
+
+.disease-card strong
+{
+    display:block;
+    font-size:11px
+}
+
+.disease-card small
+{
+    display:block;
+    color:#8998a1;
+    font-size:8.5px;
+    margin-top:4px
+}
+
+.disclaimer
+{
+    display:flex;
+    gap:7px;
+    color:#89979e;
+    font-size:9px;
+    margin-top:16px
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
 .workspace-page
 {
-    padding:34px 38px 50px;max-width:1500px;margin:auto}
+    padding:34px 38px 50px;
+    max-width:1500px;
+    margin:auto
+}
+
 .page-header
 {
-    display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:23px
+}
+
 .kicker
 {
-    font-size:9px;font-weight:800;letter-spacing:1.1px;color:#83939d}
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.1px;
+    color:#83939d
+}
+
 .page-header h1
 {
-    font:700 28px Manrope;color:var(--navy);margin-top:4px}
+    font:700 28px Manrope;
+    color:var(--navy);
+    margin-top:4px
+}
+
 .page-header p
 {
-    font-size:12px;color:#71828d;margin-top:5px}
+    font-size:12px;
+    color:#71828d;
+    margin-top:5px
+}
+
 .ready-status
 {
-    display:flex;gap:7px;background:var(--green);color:#47867d;border-radius:20px;padding:8px 11px;font-size:9px;font-weight:700}.ready-status span{width:7px;height:7px;border-radius:50%;background:#5ca399}.workspace-grid{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;align-items:start}.image-viewer-column{position:sticky;top:24px;align-self:start;width:285px;max-width:285px}.panel{background:#fff;border:1px solid var(--border);border-radius:13px;box-shadow:0 7px 24px rgba(29,57,78,.055);padding:22px;margin-bottom:17px}.panel-title{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.panel-title h2{font:700 18px Manrope;color:var(--navy);margin-top:4px}.title-icon{color:#75a4b7}.eye-upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.eye-upload-zone{min-height:215px;border:1.5px dashed #b8ccd7;background:#f8fbfc;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer}.eye-upload-zone:hover{background:#f3f8fa;border-color:#83aabd}.eye-upload-zone input{display:none}.upload-icon{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#e9f3f7;color:var(--blue);font-size:21px;margin-bottom:12px}.eye-upload-zone strong{font-size:13px;color:var(--navy)}.eye-upload-zone span{font-size:9px;color:#8998a2;margin-top:5px;text-align:center;padding:0 10px}.patient-note{display:flex;gap:8px;margin-top:13px;background:#f5f8f9;padding:10px;border-radius:8px;color:#7d8c95;font-size:9px;line-height:1.5}.selected-files{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:17px}.selected-file{display:flex;align-items:center;gap:10px;padding:10px;background:#f7fafb;border:1px solid #e4ecef;border-radius:9px}.file-icon{width:39px;height:39px;border-radius:8px;background:#edf5f8;color:var(--blue);display:grid;place-items:center}.file-text{min-width:0}.file-text strong{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.full-button{width:100%;padding:13px}.full-button:disabled{opacity:.5;cursor:not-allowed}.ready-badge,.complete-badge{display:inline-flex;gap:5px;background:var(--green);color:#47867d;border-radius:18px;padding:7px 9px;font-size:9px;font-weight:700}.result-summary{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:9px;margin-bottom:17px}.result-box{background:#f7fafb;border:1px solid #e4ecef;border-radius:9px;padding:13px}.result-box span{display:block;color:#83929b;font-size:9px;margin-bottom:6px}.result-box strong{display:block;color:var(--navy);font-size:14px}.disease-detail{background:#f2f7f8;border-left:3px solid #78a6b6;border-radius:7px;padding:12px;margin-bottom:20px}.disease-detail p{font-size:10px;color:#637783;line-height:1.6;margin-top:5px}.probability-header{display:flex;justify-content:space-between;margin-bottom:12px}.probability-header h3{font-size:12px}.probability-header span{font-size:9px;color:#8e9ba3}.probability{margin-bottom:11px}.probability-top{display:flex;justify-content:space-between;font-size:10px;margin-bottom:5px}.probability-top span:last-child{font-weight:700}.probability-bar{height:6px;border-radius:10px;background:#edf1f3;overflow:hidden}.probability-bar span{display:block;height:100%;background:#76a7bb;border-radius:inherit}.prototype-note{display:flex;gap:8px;margin-top:19px;padding:11px;background:#f5f8f9;border-radius:8px;color:#7d8c95;font-size:9px;line-height:1.5}.viewer-panel{margin-bottom:0}.viewer-state{background:#f2f5f6;color:#89979f;border-radius:15px;padding:6px 9px;font-size:8px;font-weight:700}.viewer-state.ready{background:var(--green);color:#47867d}.dual-viewer{display:flex;flex-direction:column;gap:12px}.eye-view{position:relative;width:100%;aspect-ratio:1 / 1;height:auto;background:#f3f7f8;border:1px solid #dfe8eb;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center}.eye-view>span{position:absolute;top:9px;left:9px;z-index:2;background:rgba(255,255,255,.9);padding:5px 7px;border-radius:5px;color:#637783;font-size:8px;font-weight:800}.eye-view img{width:100%;height:100%;object-fit:contain}.viewer-empty{text-align:center;color:#8b9aa3;padding:10px}.viewer-empty i{display:block;font-size:28px;color:#8eafbd;margin-bottom:9px}.viewer-empty strong{display:block;font-size:10px;color:var(--navy)}.viewer-footer{display:flex;justify-content:space-between;color:#98a4ab;font-size:8px;padding-top:9px}.bottom-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:17px}.secondary-button{border:1px solid #c9d9df;border-radius:7px;background:#fff;color:#426477;padding:12px 17px;font-size:12px;font-weight:700;cursor:pointer}.secondary-button:hover{background:#f3f8fa}.secondary-button i{margin-right:7px}.chat-panel{border-color:#d9e7eb}.close-chat{border:0;background:transparent;color:#82949d;cursor:pointer;font-size:15px}.chat-placeholder{background:#f5f9fa;border:1px dashed #cbdde3;border-radius:9px;padding:28px;text-align:center;color:#7b8d96}.chat-placeholder>i{font-size:30px;color:#78a5b5;margin-bottom:10px}.chat-placeholder strong{display:block;color:var(--navy);font-size:13px}.chat-placeholder p{font-size:10px;line-height:1.6;max-width:550px;margin:7px auto 17px}.chat-input-demo{display:flex;align-items:center;justify-content:space-between;text-align:left;background:#fff;border:1px solid var(--border);border-radius:7px;padding:9px 10px;color:#a0abb1;font-size:9px}.chat-input-demo button{border:0;background:#e8f1f4;color:#6d99aa;border-radius:5px;padding:7px 9px}@media(max-width:1100px){.sidebar{width:210px}.main{margin-left:210px}.workspace-grid{grid-template-columns:1fr}.image-viewer-column{position:static;order:-1}.disease-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.sidebar{position:static;width:100%;height:auto}.main{margin-left:0}.home-page,.workspace-page{padding:25px 15px}.disease-grid,.eye-upload-grid,.selected-files,.bottom-actions{grid-template-columns:1fr}.result-summary{grid-template-columns:1fr}.page-header{align-items:flex-start;flex-direction:column;gap:12px}.eye-view{height:300px}}
+    display:flex;
+    gap:7px;
+    background:var(--green);
+    color:#47867d;
+    border-radius:20px;
+    padding:8px 11px;
+    font-size:9px;
+    font-weight:700
+}
 
-/* Compact 1:1 viewer for square retinal fundus images */
-.image-viewer-column .panel{width:100%;box-sizing:border-box}
-.image-viewer-column .dual-viewer{display:flex;flex-direction:column;gap:12px}
-.image-viewer-column .eye-view img{width:100%;height:100%;object-fit:cover;display:block}
+.ready-status span
+{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#5ca399
+}
 
-/* Home disease gallery: square retinal images */
-.retina-gallery .gallery-card {
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
+
+/* =========================================================
+   MAIN DASHBOARD GRID
+   RIGHT IMAGE VIEWER IS PRESERVED
+   ========================================================= */
+
+.workspace-grid
+{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 285px;
+    gap:18px;
+    align-items:start
 }
-.retina-gallery .gallery-card img {
-    width: 100%;
-    height: 150%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
+
+.analysis-area
+{
+    min-width:0
 }
-#resultDescription {
-    white-space: pre-line;
+
+.image-viewer-column
+{
+    position:sticky;
+    top:24px;
+    align-self:start;
+    width:285px;
+    max-width:285px
 }
-/* Final Home gallery fix: true square 1:1 retinal-image frames */
-.retina-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px;
+
+
+/* =========================================================
+   GENERAL PANELS
+   ========================================================= */
+
+.panel
+{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:13px;
+    box-shadow:0 7px 24px rgba(29,57,78,.055);
+    padding:22px;
+    margin-bottom:17px
 }
-.retina-gallery .gallery-card {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    overflow: hidden;
-    border-radius: 12px;
+
+.panel-title
+{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:18px
 }
-.retina-gallery .gallery-card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
+
+.panel-title h2
+{
+    font:700 18px Manrope;
+    color:var(--navy);
+    margin-top:4px
+}
+
+.title-icon
+{
+    color:#75a4b7
+}
+
+
+/* =========================================================
+   UPLOAD
+   ========================================================= */
+
+.eye-upload-grid
+{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px
+}
+
+.eye-upload-zone
+{
+    min-height:215px;
+    border:1.5px dashed #b8ccd7;
+    background:#f8fbfc;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer
+}
+
+.eye-upload-zone:hover
+{
+    background:#f3f8fa;
+    border-color:#83aabd
+}
+
+.eye-upload-zone input
+{
+    display:none
+}
+
+.upload-icon
+{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#e9f3f7;
+    color:var(--blue);
+    font-size:21px;
+    margin-bottom:12px
+}
+
+.eye-upload-zone strong
+{
+    font-size:13px;
+    color:var(--navy)
+}
+
+.eye-upload-zone span
+{
+    font-size:9px;
+    color:#8998a2;
+    margin-top:5px;
+    text-align:center;
+    padding:0 10px
+}
+
+.patient-note
+{
+    display:flex;
+    gap:8px;
+    margin-top:13px;
+    background:#f5f8f9;
+    padding:10px;
+    border-radius:8px;
+    color:#7d8c95;
+    font-size:9px;
+    line-height:1.5
+}
+
+
+/* =========================================================
+   SELECTED FILES
+   ========================================================= */
+
+.selected-files
+{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:17px
+}
+
+.selected-file
+{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    background:#f7fafb;
+    border:1px solid #e4ecef;
+    border-radius:9px
+}
+
+.file-icon
+{
+    width:39px;
+    height:39px;
+    border-radius:8px;
+    background:#edf5f8;
+    color:var(--blue);
+    display:grid;
+    place-items:center
+}
+
+.file-text
+{
+    min-width:0
+}
+
+.file-text strong
+{
+    display:block;
+    font-size:10px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-top:3px
+}
+
+.full-button
+{
+    width:100%;
+    padding:13px
+}
+
+.full-button:disabled
+{
+    opacity:.5;
+    cursor:not-allowed
+}
+
+.ready-badge,
+.complete-badge
+{
+    display:inline-flex;
+    gap:5px;
+    background:var(--green);
+    color:#47867d;
+    border-radius:18px;
+    padding:7px 9px;
+    font-size:9px;
+    font-weight:700
+}
+
+
+/* =========================================================
+   NEW RESULT DESIGN
+   ========================================================= */
+
+#resultPanel
+{
+    padding:22px
+}
+
+
+/* Individual left/right eye result card */
+
+.eye-result-card
+{
+    background:#fff;
+    border:1px solid #dfe8eb;
+    border-radius:11px;
+    padding:20px;
+    margin-bottom:18px
+}
+
+
+/* Add subtle separation between eyes */
+
+.eye-result-card + .eye-result-card
+{
+    margin-top:18px
+}
+
+
+/* Eye heading */
+
+.eye-title
+{
+    margin-bottom:16px
+}
+
+.eye-title h3
+{
+    margin-top:5px;
+    color:var(--navy);
+    font-size:18px;
+    font-weight:700
+}
+
+.eye-title h3 i
+{
+    color:var(--blue);
+    margin-right:7px
+}
+
+
+/* =========================================================
+   RESULT SUMMARY
+   ========================================================= */
+
+.result-summary
+{
+    display:grid;
+    grid-template-columns:minmax(0,1.6fr) minmax(150px,1fr);
+    gap:10px;
+    margin-bottom:18px
+}
+
+.result-box
+{
+    background:#f7fafb;
+    border:1px solid #dfe8eb;
+    border-radius:9px;
+    padding:14px
+}
+
+.result-box span
+{
+    display:block;
+    color:#87959d;
+    font-weight:600;
+    font-size:9px;
+    margin-bottom:7px
+}
+
+.result-box strong
+{
+    display:block;
+    color:var(--navy);
+    font-size:14px;
+    line-height:1.4
+}
+
+.main-result
+{
+    background:#f5f9fa
+}
+
+
+/* =========================================================
+   PROBABILITIES
+   HIDDEN VISUALLY ONLY
+   JavaScript IDs remain untouched.
+   ========================================================= */
+
+.eye-result-card .probability-header,
+.eye-result-card #leftProbabilityList,
+.eye-result-card #rightProbabilityList
+{
+    display:none
+}
+
+.probability-header
+{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px
+}
+
+.probability-header h3
+{
+    font-size:12px;
+    color:var(--navy);
+    font-weight:700
+}
+
+.probability-header span
+{
+    font-size:9px;
+    color:#8c9aa2
+}
+
+.probability
+{
+    margin-bottom:12px
+}
+
+.probability-top
+{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:6px
+}
+
+.probability-top span:first-child
+{
+    color:#627681;
+    font-size:10px
+}
+
+.probability-top span:last-child
+{
+    font-weight:700;
+    font-size:10px;
+    color:var(--navy)
+}
+
+.probability-bar
+{
+    height:6px;
+    width:100%;
+    border-radius:20px;
+    background:#e9eff1;
+    overflow:hidden
+}
+
+.probability-bar span
+{
+    display:block;
+    height:100%;
+    background:#4e8da3;
+    border-radius:20px;
+    transition:width .5s ease
+}
+
+
+/* =========================================================
+   AI GENERATED MEDICAL INFORMATION
+   IMPORTANT:
+   HTML uses .ai-medical-card and .ai-card-header
+   ========================================================= */
+
+.ai-medical-card
+{
+    margin-top:8px;
+    padding:17px;
+    background:#f2f7f8;
+    border-left:3px solid #78a6b6;
+    border-radius:8px
+}
+
+.ai-card-header
+{
+    margin-bottom:10px
+}
+
+.ai-card-header h3
+{
+    margin-top:5px;
+    font-size:13px;
+    color:var(--navy);
+    font-weight:700
+}
+
+.ai-card-header h3 i
+{
+    color:var(--blue);
+    margin-right:6px
+}
+
+.medical-report
+{
+    color:#637783;
+    font-size:10px;
+    line-height:1.75;
+    /* white-space:pre-line */
+}
+
+.medical-report h3 {
+    margin: 0 0 12px;
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.medical-report h4 {
+    margin: 18px 0 8px;
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.medical-report h5 {
+    margin: 12px 0 6px;
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.medical-report p {
+    margin-bottom: 10px;
+}
+
+.medical-report ul {
+    margin: 6px 0 12px 20px;
+    padding: 0;
+}
+
+.medical-report li {
+    margin-bottom: 5px;
+}
+
+.medical-report strong {
+    color: #405f70;
+}
+
+/* Make long LLM response readable */
+
+#leftMedicalReport,
+#rightMedicalReport
+{
+    max-height:none;
+    overflow:visible
+}
+
+
+/* =========================================================
+   PROTOTYPE NOTE
+   ========================================================= */
+
+.prototype-note
+{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+    padding:11px;
+    background:#f5f8f9;
+    border-radius:8px;
+    color:#7d8c95;
+    font-size:9px;
+    line-height:1.5
+}
+
+
+/* =========================================================
+   BOTTOM ACTION BUTTONS
+   ========================================================= */
+
+.bottom-actions
+{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:18px;
+    margin-bottom:18px
+}
+
+.bottom-actions button
+{
+    min-width:180px
+}
+
+.secondary-button
+{
+    border:1px solid #c9d9df;
+    border-radius:7px;
+    background:#fff;
+    color:#426477;
+    padding:12px 17px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer
+}
+
+.secondary-button:hover
+{
+    background:#f3f8fa
+}
+
+.secondary-button i
+{
+    margin-right:7px
+}
+
+
+/* =========================================================
+   RIGHT IMAGE VIEWER
+   DO NOT CHANGE
+   ========================================================= */
+
+.viewer-panel
+{
+    margin-bottom:0
+}
+
+.viewer-state
+{
+    background:#f2f5f6;
+    color:#89979f;
+    border-radius:15px;
+    padding:6px 9px;
+    font-size:8px;
+    font-weight:700
+}
+
+.viewer-state.ready
+{
+    background:var(--green);
+    color:#47867d
+}
+
+.dual-viewer
+{
+    display:flex;
+    flex-direction:column;
+    gap:12px
+}
+
+.eye-view
+{
+    position:relative;
+    width:100%;
+    aspect-ratio:1 / 1;
+    height:auto;
+    background:#f3f7f8;
+    border:1px solid #dfe8eb;
+    border-radius:9px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+.eye-view>span
+{
+    position:absolute;
+    top:9px;
+    left:9px;
+    z-index:2;
+    background:rgba(255,255,255,.9);
+    padding:5px 7px;
+    border-radius:5px;
+    color:#637783;
+    font-size:8px;
+    font-weight:800
+}
+
+.eye-view img
+{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block
+}
+
+.viewer-empty
+{
+    text-align:center;
+    color:#8b9aa3;
+    padding:10px
+}
+
+.viewer-empty i
+{
+    display:block;
+    font-size:28px;
+    color:#8eafbd;
+    margin-bottom:9px
+}
+
+.viewer-empty strong
+{
+    display:block;
+    font-size:10px;
+    color:var(--navy)
+}
+
+.viewer-footer
+{
+    display:flex;
+    justify-content:space-between;
+    color:#98a4ab;
+    font-size:8px;
+    padding-top:9px
+}
+
+.image-viewer-column .panel
+{
+    width:100%;
+    box-sizing:border-box
+}
+
+.image-viewer-column .dual-viewer
+{
+    display:flex;
+    flex-direction:column;
+    gap:12px
+}
+
+.image-viewer-column .eye-view img
+{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block
+}
+
+
+/* =========================================================
+   CHAT / ASK ABOUT PREDICTION
+   ========================================================= */
+
+.chat-panel
+{
+    margin-top:15px;
+    border-color:#d9e7eb
+}
+
+.close-chat
+{
+    border:0;
+    background:transparent;
+    color:#82949d;
+    cursor:pointer;
+    font-size:15px
+}
+
+
+/* Current prediction summary */
+
+.chat-predictions
+{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:18px
+}
+
+.chat-predictions > div
+{
+    padding:12px;
+    background:#f7fafb;
+    border:1px solid #e4ecef;
+    border-radius:8px
+}
+
+.chat-predictions span
+{
+    display:block;
+    color:#8a989f;
+    font-size:8px;
+    font-weight:700;
+    margin-bottom:5px
+}
+
+.chat-predictions strong
+{
+    color:var(--navy);
+    font-size:11px
+}
+
+
+/* Question label */
+
+.question-label
+{
+    display:block;
+    color:var(--navy);
+    font-size:10px;
+    font-weight:700;
+    margin-bottom:7px
+}
+
+
+/* Question input row */
+
+.question-row
+{
+    display:flex;
+    gap:8px
+}
+
+.question-row input
+{
+    flex:1;
+    min-width:0;
+    border:1px solid #dfe8eb;
+    border-radius:8px;
+    padding:12px;
+    outline:none;
+    background:#fff;
+    color:var(--navy);
+    font-size:11px
+}
+
+.question-row input:focus
+{
+    border-color:#78a6b6
+}
+
+.question-row button
+{
+    white-space:nowrap
+}
+
+
+/* =========================================================
+   CHAT ANSWER
+   ========================================================= */
+
+.chat-answer
+{
+    margin-top:18px;
+    padding:15px;
+    background:#f2f7f8;
+    border-left:3px solid #78a6b6;
+    border-radius:8px
+}
+
+.chat-answer-title
+{
+    color:var(--navy);
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:9px
+}
+
+.chat-answer-title i
+{
+    color:var(--blue);
+    margin-right:5px
+}
+
+#chatAnswer
+{
+    color:#637783;
+    font-size:10px;
+    line-height:1.7;
+    white-space:pre-line
+}
+
+
+/* =========================================================
+   OLD CHAT CLASSES
+   Kept so existing JS/CSS logic is not broken
+   ========================================================= */
+
+.chat-prediction-summary
+{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:18px
+}
+
+.chat-prediction-summary > div
+{
+    padding:12px;
+    background:#f7fafb;
+    border:1px solid #e4ecef;
+    border-radius:8px
+}
+
+.chat-prediction-summary span
+{
+    display:block;
+    color:#8a989f;
+    font-size:8px;
+    font-weight:700;
+    margin-bottom:5px
+}
+
+.chat-prediction-summary strong
+{
+    color:var(--navy);
+    font-size:11px
+}
+
+.chat-question-area label
+{
+    display:block;
+    color:var(--navy);
+    font-size:10px;
+    font-weight:700;
+    margin-bottom:7px
+}
+
+.chat-input-row
+{
+    display:flex;
+    gap:8px
+}
+
+.chat-input-row input
+{
+    flex:1;
+    min-width:0;
+    border:1px solid #dfe8eb;
+    border-radius:8px;
+    padding:12px;
+    outline:none;
+    background:#fff;
+    color:var(--navy)
+}
+
+.chat-input-row input:focus
+{
+    border-color:#78a6b6
+}
+
+.chat-input-row button
+{
+    white-space:nowrap
+}
+
+
+/* =========================================================
+   HOME RETINA GALLERY
+   ========================================================= */
+
+.retina-gallery
+{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px
+}
+
+.retina-gallery .gallery-card
+{
+    width:100%;
+    aspect-ratio:1 / 1;
+    height:auto;
+    overflow:hidden;
+    border-radius:12px
+}
+
+.retina-gallery .gallery-card img
+{
+    display:block;
+    width:100%;
+    height:100%;
+    aspect-ratio:1 / 1;
+    object-fit:contain
+}
+
+#resultDescription
+{
+    white-space:pre-line
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1100px)
+{
+    .sidebar
+    {
+        width:210px
+    }
+
+    .main
+    {
+        margin-left:210px
+    }
+
+    .workspace-grid
+    {
+        grid-template-columns:minmax(0, 1fr) 250px
+    }
+
+    .image-viewer-column
+    {
+        position: sticky;
+        top: 20px;
+        order: initial;
+        width: 250px;
+        max-width: 250px;
+    }
+
+    .disease-grid
+    {
+        grid-template-columns:repeat(2,1fr)
+    }
+}
+
+
+@media(max-width:700px)
+{
+    .result-summary
+    {
+        grid-template-columns:1fr
+    }
+
+    .chat-predictions,
+    .chat-prediction-summary
+    {
+        grid-template-columns:1fr
+    }
+
+    .question-row,
+    .chat-input-row
+    {
+        flex-direction:column
+    }
+
+    .bottom-actions
+    {
+        flex-direction:column
+    }
+
+    .bottom-actions button
+    {
+        width:100%
+    }
+}
+
+
+@media(max-width:650px)
+{
+    .sidebar
+    {
+        position:static;
+        width:100%;
+        height:auto
+    }
+
+    .main
+    {
+        margin-left:0
+    }
+
+    .home-page,
+    .workspace-page
+    {
+        padding:25px 15px
+    }
+
+    .disease-grid,
+    .eye-upload-grid,
+    .selected-files
+    {
+        grid-template-columns:1fr
+    }
+
+    .result-summary
+    {
+        grid-template-columns:1fr
+    }
+
+    .page-header
+    {
+        align-items:flex-start;
+        flex-direction:column;
+        gap:12px
+    }
+
+    .eye-view
+    {
+        height:300px
+    }
+
+    .eye-result-card
+    {
+        padding:15px
+    }
+}
+
+/* =========================================================
+   FIX: KEEP RIGHT IMAGE VIEWER ON THE RIGHT
+   ========================================================= */
+
+@media (min-width:651px) {
+
+    .workspace-grid {
+        display:grid !important;
+    }
+
+    .analysis-area {
+        grid-column:1;
+        grid-row:1;
+    }
+
+    .image-viewer-column {
+        grid-column:2;
+        grid-row:1;
+        position:sticky !important;
+        top:24px;
+        align-self:start;
+    }
+}
+
+/* Mobile: allow normal stacked layout */
+@media (max-width:650px) {
+
+    .workspace-grid {
+        display:block;
+    }
+
+    .image-viewer-column {
+        position:static;
+        width:100%;
+        max-width:none;
+    }
+}
+
+/* =========================================================
+   FINAL SAFETY RULE
+   Ensures hidden elements always stay hidden.
+   ========================================================= */
+
+.hidden
+{
+    display:none!important
 }

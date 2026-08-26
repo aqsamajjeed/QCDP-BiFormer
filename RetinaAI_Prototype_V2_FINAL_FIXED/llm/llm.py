@@ -1,7 +1,8 @@
 from google import genai
+from google.genai import types
 from llm.config import GEMINI_API_KEY
 from rag.rag import retrieve_chunks, build_context
-
+import json
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
@@ -42,39 +43,82 @@ LEFT EYE MEDICAL INFORMATION:
 RIGHT EYE MEDICAL INFORMATION:
 {right_context}
 
-Generate a clear educational explanation for both eyes.
+Generate medical information separately for each eye.
+
+For the LEFT EYE:
+- Discuss ONLY the left-eye prediction.
+- Use ONLY the retrieved left-eye information.
+
+For the RIGHT EYE:
+- Discuss ONLY the right-eye prediction.
+- Use ONLY the retrieved right-eye information.
+
 
 Keep LEFT and RIGHT eye information separate.
 
-For each eye explain:
+For each eye explain,when available:
 - What the condition is
 - Important symptoms/signs
 - Risk factors
 - Detection
 - General management information if available
 
-Use ONLY the retrieved information.
 Do not invent information.
 Do not claim that the prediction is a confirmed diagnosis.
 Keep the answer concise.
+
+Return ONLY valid JSON in exactly this format:
+
+{{
+    "left": "medical information for the left eye",
+    "right": "medical information for the right eye"
+}}
 """
 
     try:
 
         response = client.models.generate_content(
             model=MODEL_NAME,
-            contents=prompt
+            contents=prompt,
+             config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema={
+                    "type": "OBJECT",
+                    "properties": {
+                        "left": {
+                            "type": "STRING"
+                        },
+                        "right": {
+                            "type": "STRING"
+                        }
+                    },
+                    "required": ["left", "right"]
+                }
+            )
         )
 
-        return response.text
+        report = response.parsed
 
+        if report:
+            return report
+
+        return {
+            "left": "Medical information is currently unavailable.",
+            "right": "Medical information is currently unavailable."
+        }
+        
     except Exception as e:
 
-        return (
-            "The LLM service is temporarily unavailable. "
-            "The disease prediction and medical information "
-            "retrieval are still available."
-        )
+        print("Initial report error:", e)
+
+        return {
+            "left": (
+                "Medical information is currently unavailable."
+            ),
+            "right": (
+                "Medical information is currently unavailable."
+            )
+        }
 
 
 def answer_followup_question(
