@@ -10,11 +10,25 @@
 </head>
 <body>
 <aside class="sidebar">
-  <div class="brand"><div class="brand-mark"><i class="fa-solid fa-eye"></i></div><div><div class="brand-name">RetinaAI</div><div class="brand-subtitle">Clinical Research</div></div></div>
+  <div class="brand">
+    <div class="brand-mark">
+        <i class="fa-solid fa-eye"></i>
+    </div><div>
+        <div class="brand-name">RetinaAI</div>
+        <div class="brand-subtitle">Clinical Research</div>
+    </div></div>
   <div class="nav-title">MAIN MENU</div>
-  <button class="nav-item active" data-page="home"><i class="fa-solid fa-house"></i><span>Home</span></button>
-  <button class="nav-item" data-page="dashboard"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></button>
-  <div class="sidebar-bottom"><div class="prototype-status"><span class="status-dot"></span><div><strong>Prototype Ready</strong><small>Retinal screening</small></div></div><div class="sidebar-meta"><span>ODIR-5K</span><span>8 classes</span></div></div>
+  <button class="nav-item active" data-page="home">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span></button>
+  <button class="nav-item" data-page="dashboard">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Dashboard</span></button>
+  <div class="sidebar-bottom"><div class="prototype-status">
+    <span class="status-dot"></span><div><strong>Prototype Ready</strong>
+        <small>Retinal screening</small></div>
+    </div><div class="sidebar-meta"><span>ODIR-5K</span>
+        <span>8 classes</span></div></div>
 </aside>
 
 <main class="main">
@@ -63,9 +77,14 @@
 <button id="analyzeButton" class="primary-button full-button" disabled><i class="fa-solid fa-microscope"></i> Analyze Patient Images</button>
 </section>
 
+<!-- =====================================================
+     PREDICTION RESULT
+     ===================================================== -->
+
 <section id="resultPanel" class="panel hidden">
 
     <div class="panel-title">
+
         <div>
             <span class="mini-label">
                 RETINAL MODEL OUTPUT
@@ -80,17 +99,33 @@
             <i class="fa-solid fa-check"></i>
             Analysis complete
         </span>
+
     </div>
 
 
-    <!-- LEFT EYE -->
+    <!-- =================================================
+         LEFT EYE
+         ================================================= -->
 
-    <div class="eye-result-section">
+    <div class="eye-result-card">
 
-        <h3>
-            <i class="fa-regular fa-eye"></i>
-            Left Eye
-        </h3>
+        <div class="eye-title">
+
+            <div>
+                <span class="mini-label">
+                    EYE 01
+                </span>
+
+                <h3>
+                    <i class="fa-regular fa-eye"></i>
+                    Left Eye
+                </h3>
+            </div>
+
+        </div>
+
+
+        <!-- Prediction + Confidence -->
 
         <div class="result-summary">
 
@@ -106,6 +141,7 @@
 
             </div>
 
+
             <div class="result-box">
 
                 <span>
@@ -120,17 +156,83 @@
 
         </div>
 
+
+        <!-- Left probabilities -->
+
+        <div class="probability-header">
+
+            <h3>
+                Left Eye Class Probabilities
+            </h3>
+
+            <span>
+                8 classes
+            </span>
+
+        </div>
+
+        <div id="leftProbabilityList"></div>
+
+
+        <!-- Left AI information -->
+
+        <div class="ai-medical-card">
+
+            <div class="ai-card-header">
+
+                <div>
+
+                    <span class="mini-label">
+                        AI-GENERATED MEDICAL INFORMATION
+                    </span>
+
+                    <h3>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Left Eye Details
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="leftMedicalReport"
+                class="medical-report"
+            >
+                Generating medical information...
+            </div>
+
+        </div>
+
     </div>
 
 
-    <!-- RIGHT EYE -->
+    <!-- =================================================
+         RIGHT EYE
+         ================================================= -->
 
-    <div class="eye-result-section">
+    <div class="eye-result-card">
 
-        <h3>
-            <i class="fa-regular fa-eye"></i>
-            Right Eye
-        </h3>
+        <div class="eye-title">
+
+            <div>
+
+                <span class="mini-label">
+                    EYE 02
+                </span>
+
+                <h3>
+                    <i class="fa-regular fa-eye"></i>
+                    Right Eye
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- Prediction + Confidence -->
 
         <div class="result-summary">
 
@@ -146,6 +248,7 @@
 
             </div>
 
+
             <div class="result-box">
 
                 <span>
@@ -160,55 +263,61 @@
 
         </div>
 
+
+        <!-- Right probabilities -->
+
+        <div class="probability-header">
+
+            <h3>
+                Right Eye Class Probabilities
+            </h3>
+
+            <span>
+                8 classes
+            </span>
+
+        </div>
+
+        <div id="rightProbabilityList"></div>
+
+
+        <!-- Right AI information -->
+
+        <div class="ai-medical-card">
+
+            <div class="ai-card-header">
+
+                <div>
+
+                    <span class="mini-label">
+                        AI-GENERATED MEDICAL INFORMATION
+                    </span>
+
+                    <h3>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Right Eye Details
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="rightMedicalReport"
+                class="medical-report"
+            >
+                Generating medical information...
+            </div>
+
+        </div>
+
     </div>
 
 
-    <!-- PROBABILITIES -->
-
-    <div class="probability-header">
-
-        <h3>
-            Left Eye Class Probabilities
-        </h3>
-
-        <span>
-            8 classes
-        </span>
-
-    </div>
-
-    <div id="leftProbabilityList"></div>
-
-
-    <div class="probability-header">
-
-        <h3>
-            Right Eye Class Probabilities
-        </h3>
-
-        <span>
-            8 classes
-        </span>
-
-    </div>
-
-    <div id="rightProbabilityList"></div>
-
-
-    <!-- AUTOMATIC RAG + LLM REPORT -->
-
-    <div class="disease-detail">
-
-        <span>
-            AI-GENERATED MEDICAL INFORMATION
-        </span>
-
-        <p id="medicalReport">
-            Generating medical explanation...
-        </p>
-
-    </div>
-
+    <!-- =================================================
+         DISCLAIMER
+         ================================================= -->
 
     <div class="prototype-note">
 
@@ -223,17 +332,167 @@
 
 </section>
 
-<section id="bottomActions" class="bottom-actions hidden">
-<button id="newPredictionButton" class="secondary-button"><i class="fa-solid fa-rotate"></i> New Prediction</button>
-<button id="askQuestionButton" class="primary-button"><i class="fa-regular fa-comments"></i> Ask About This Prediction</button>
+
+<!-- =====================================================
+     BOTTOM BUTTONS
+     ===================================================== -->
+
+<section
+    id="bottomActions"
+    class="bottom-actions hidden"
+>
+
+    <button
+        id="newPredictionButton"
+        class="secondary-button"
+    >
+
+        <i class="fa-solid fa-rotate"></i>
+
+        New Prediction
+
+    </button>
+
+
+    <button
+        id="askQuestionButton"
+        class="primary-button"
+    >
+
+        <i class="fa-regular fa-comments"></i>
+
+        Ask About This Prediction
+
+    </button>
+
 </section>
 
-<section id="chatPanel" class="panel chat-panel hidden">
-<div class="panel-title"><div><span class="mini-label">FUTURE RAG / LLM</span><h2>Ask About This Prediction</h2></div><button id="closeChat" class="close-chat"><i class="fa-solid fa-xmark"></i></button></div>
-<div class="chat-placeholder"><i class="fa-regular fa-comments"></i><strong>Question & Answer</strong><p>This area is reserved for the future RAG + LLM conversation about the current predicted disease and retinal images.</p><div class="chat-input-demo"><span>Ask a question about this disease...</span><button disabled><i class="fa-solid fa-paper-plane"></i></button></div></div>
+
+<!-- =====================================================
+     ASK QUESTION
+     ===================================================== -->
+
+<section
+    id="chatPanel"
+    class="panel chat-panel hidden"
+>
+
+    <div class="panel-title">
+
+        <div>
+
+            <span class="mini-label">
+                RAG + LLM
+            </span>
+
+            <h2>
+                Ask About This Prediction
+            </h2>
+
+        </div>
+
+
+        <button
+            id="closeChat"
+            class="close-chat"
+            type="button"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- Current predictions -->
+
+    <div class="chat-predictions">
+
+        <div>
+
+            <span>
+                LEFT EYE
+            </span>
+
+            <strong id="chatLeftPrediction">
+                —
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                RIGHT EYE
+            </span>
+
+            <strong id="chatRightPrediction">
+                —
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- Question -->
+
+    <label
+        for="questionInput"
+        class="question-label"
+    >
+        Ask a question about this prediction
+    </label>
+
+
+    <div class="question-row">
+
+        <input
+            id="questionInput"
+            type="text"
+            placeholder="e.g. What are the common symptoms?"
+        >
+
+
+        <button
+            id="sendQuestionButton"
+            class="primary-button"
+            type="button"
+        >
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+            Send
+
+        </button>
+
+    </div>
+
+
+    <!-- Answer -->
+
+    <div
+        id="chatAnswerBox"
+        class="chat-answer hidden"
+    >
+
+        <div class="chat-answer-title">
+
+            <i class="fa-solid fa-robot"></i>
+
+            AI Answer
+
+        </div>
+
+
+        <div id="chatAnswer"></div>
+
+    </div>
+
 </section>
 
-</div>
 
 <aside class="image-viewer-column"><section class="panel viewer-panel">
 <div class="panel-title"><div><span class="mini-label">IMAGE VIEWER</span><h2>Patient Fundus Images</h2></div><span id="viewerState" class="viewer-state">Waiting</span></div>

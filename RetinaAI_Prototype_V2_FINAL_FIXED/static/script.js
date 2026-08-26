@@ -65,6 +65,65 @@ function loadPreview(file,side){
 document.getElementById("leftInput").addEventListener("change",e=>loadPreview(e.target.files[0],"left"));
 document.getElementById("rightInput").addEventListener("change",e=>loadPreview(e.target.files[0],"right"));
 
+function formatMedicalReport(text) {
+    if (!text) {
+        return "Medical explanation is currently unavailable.";
+    }
+
+    let html = String(text)
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n")
+        .trim();
+
+    // Remove horizontal separators
+    html = html.replace(/^\s*---+\s*$/gm, "");
+
+    // Escape HTML
+    html = html
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    // Bold
+    html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+    // H3 / H4 / H5
+    html = html.replace(
+        /^###\s+(.*?)$/gm,
+        '<h3>$1</h3>'
+    );
+
+    html = html.replace(
+        /^####\s+(.*?)$/gm,
+        '<h4>$1</h4>'
+    );
+
+    html = html.replace(
+        /^#####\s+(.*?)$/gm,
+        '<h5>$1</h5>'
+    );
+
+    // Bullet lists
+    html = html.replace(
+        /^\s*[\*\-]\s+(.*?)$/gm,
+        "<li>$1</li>"
+    );
+
+    // Group consecutive li elements
+    html = html.replace(
+        /(<li>.*?<\/li>\s*)+/gs,
+        match => `<ul>${match}</ul>`
+    );
+
+    // Remove remaining single markdown emphasis
+    html = html.replace(/\*(.*?)\*/g, "$1");
+
+    // Convert remaining new lines
+    html = html.replace(/\n{2,}/g, "<br><br>");
+    html = html.replace(/\n/g, "<br>");
+
+    return html;
+}
 
 document.getElementById("analyzeButton").addEventListener("click", async () => {
 
@@ -139,7 +198,13 @@ document.getElementById("analyzeButton").addEventListener("click", async () => {
                 data.right.confidence
             ).toFixed(1) + "%";
 
+        // UPDATE CHAT PREDICTION SUMMARY
 
+    document.getElementById("chatLeftPrediction").textContent =
+    data.left.disease;
+
+    document.getElementById("chatRightPrediction").textContent =
+    data.right.disease;
         // LEFT EYE PROBABILITIES
 
         renderProbabilities(
@@ -156,13 +221,19 @@ document.getElementById("analyzeButton").addEventListener("click", async () => {
         );
 
 
-        // AUTOMATIC RAG + LLM REPORT
+      // AUTOMATIC RAG + LLM REPORT
 
-        document.getElementById(
-            "medicalReport"
-        ).textContent =
-            data.medical_report ||
-            "Medical explanation is currently unavailable.";
+document.getElementById("leftMedicalReport").innerHTML =
+    formatMedicalReport(
+        data.left.medical_report ||
+        "Medical explanation is currently unavailable."
+    );
+
+document.getElementById("rightMedicalReport").innerHTML =
+    formatMedicalReport(
+        data.right.medical_report ||
+        "Medical explanation is currently unavailable."
+    );
 
 
         // SHOW RESULT
@@ -233,3 +304,77 @@ document.getElementById("askQuestionButton").addEventListener("click",()=>{
  document.getElementById("chatPanel").scrollIntoView({behavior:"smooth",block:"start"});
 });
 document.getElementById("closeChat").addEventListener("click",()=>document.getElementById("chatPanel").classList.add("hidden"));
+
+document.getElementById("sendQuestionButton").addEventListener("click", async () => {
+
+    const questionInput = document.getElementById("questionInput");
+    const sendButton = document.getElementById("sendQuestionButton");
+    const answerBox = document.getElementById("chatAnswerBox");
+    const answer = document.getElementById("chatAnswer");
+
+    const question = questionInput.value.trim();
+
+    if (!question) {
+        alert("Please enter a question.");
+        return;
+    }
+
+    const leftPrediction =
+        document.getElementById("chatLeftPrediction").textContent.trim();
+
+    const rightPrediction =
+        document.getElementById("chatRightPrediction").textContent.trim();
+
+    sendButton.disabled = true;
+
+    sendButton.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> Asking...';
+
+    answerBox.classList.remove("hidden");
+
+    answer.innerHTML = "Generating answer...";
+
+    try {
+
+        const response = await fetch("/ask", {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                left_prediction: leftPrediction,
+                right_prediction: rightPrediction,
+                question: question
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Unable to get answer."
+            );
+        }
+
+        answer.innerHTML = formatMedicalReport(
+            data.answer || "No answer was returned."
+        );
+
+    } catch (error) {
+
+        console.error("Question error:", error);
+
+        answer.innerHTML =
+            `<strong>Error:</strong> ${error.message}`;
+
+    } finally {
+
+        // Re-enable Send button
+        sendButton.disabled = false;
+
+        sendButton.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i> Send';
+    }
+});
