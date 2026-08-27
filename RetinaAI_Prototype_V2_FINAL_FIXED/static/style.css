@@ -34,10 +34,7 @@ input
 }
 
 
-/* =========================================================
-   LEFT SIDEBAR
-   DO NOT CHANGE
-   ========================================================= */
+/* LEFT SIDEBAR */
 
 .sidebar
 {
@@ -172,7 +169,7 @@ input
 
 .sidebar-meta
 {
-    border-top:1px solid var(--border);
+    /* border-top:1px solid var(--border); */
     margin-top:15px;
     padding:12px 7px 0;
     display:flex;
@@ -182,9 +179,7 @@ input
 }
 
 
-/* =========================================================
-   MAIN
-   ========================================================= */
+/* Main */
 
 .main
 {
@@ -198,9 +193,7 @@ input
 }
 
 
-/* =========================================================
-   HOME PAGE
-   ========================================================= */
+/* HOME PAGE */
 
 .home-page
 {
@@ -214,7 +207,7 @@ input
 {
     position:absolute;
     inset:0;
-    background-image:url("image2.png");
+    background-image:url("/static/image2.png");
     background-size:cover;
     background-position:center;
     opacity:.055
@@ -576,7 +569,7 @@ input
     border-radius:50%;
     display:grid;
     place-items:center;
-    background:#e9f3f7;
+    /* background:#e9f3f7; */
     color:var(--blue);
     font-size:21px;
     margin-bottom:12px
@@ -884,7 +877,7 @@ input
 .ai-card-header h3
 {
     margin-top:5px;
-    font-size:13px;
+    font-size:15px;
     color:var(--navy);
     font-weight:700
 }
@@ -925,7 +918,7 @@ input
 }
 
 .medical-report p {
-    margin-bottom: 10px;
+    margin-bottom: 0 0 10px;
 }
 
 .medical-report ul {
@@ -1178,7 +1171,7 @@ input
 {
     display:block;
     color:#8a989f;
-    font-size:8px;
+    font-size:9px;
     font-weight:700;
     margin-bottom:5px
 }
@@ -1186,7 +1179,7 @@ input
 .chat-predictions strong
 {
     color:var(--navy);
-    font-size:11px
+    font-size:14px
 }
 
 
@@ -1196,7 +1189,7 @@ input
 {
     display:block;
     color:var(--navy);
-    font-size:10px;
+    font-size:12px;
     font-weight:700;
     margin-bottom:7px
 }
@@ -1220,7 +1213,7 @@ input
     outline:none;
     background:#fff;
     color:var(--navy);
-    font-size:11px
+    font-size:15px
 }
 
 .question-row input:focus
@@ -1250,7 +1243,7 @@ input
 .chat-answer-title
 {
     color:var(--navy);
-    font-size:11px;
+    font-size:15px;
     font-weight:700;
     margin-bottom:9px
 }
@@ -1264,8 +1257,8 @@ input
 #chatAnswer
 {
     color:#637783;
-    font-size:10px;
-    line-height:1.7;
+    font-size:12px;
+    line-height:1.4;
     white-space:pre-line
 }
 
@@ -1379,15 +1372,7 @@ input
 }
 
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-
-/* =========================================================
-   FINAL RIGHT IMAGE VIEWER FIX
-   ========================================================= */
-
+/* RESPONSIVE */
 
 
 @media(max-width:1100px)
@@ -1532,7 +1517,7 @@ input
 
 .chat-history-question {
     color:var(--navy);
-    font-size:10px;
+    font-size:12px;
     font-weight:700;
     margin-bottom:9px;
 }

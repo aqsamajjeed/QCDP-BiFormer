@@ -1,3 +1,4 @@
+import webbrowser,os
 from flask import Flask, render_template, request, jsonify
 
 from models.resnet18 import predict_patient
@@ -80,10 +81,22 @@ def predict():
             right_prediction
         )
         
-        #  ADD REPORT TO RESULT
-       
+      
+        # SEPARATE REPORTS
 
-        result["medical_report"] = report
+        result["left"]["medical_report"] = (
+            report.get(
+                "left",
+                "Medical information unavailable."
+            )
+        )
+
+        result["right"]["medical_report"] = (
+            report.get(
+                "right",
+                "Medical information unavailable."
+            )
+        )
 
     #  SEND EVERYTHING TO FRONTEND
         return jsonify(result)
@@ -160,9 +173,9 @@ def ask():
     
 #  RUN APPLICATION
 
-
 if __name__ == "__main__":
+      # Only open browser if not running in reloader process
+    if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
+        webbrowser.open('http://127.0.0.1:5000')
 
-    app.run(
-        debug=True
-    )
+    app.run(debug=True, host='127.0.0.1', port=5000)
