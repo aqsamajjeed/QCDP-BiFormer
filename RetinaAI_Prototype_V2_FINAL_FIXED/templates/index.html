@@ -24,57 +24,60 @@
   <button class="nav-item" data-page="dashboard">
     <i class="fa-solid fa-chart-line"></i>
     <span>Dashboard</span></button>
-  <div class="sidebar-bottom"><div class="prototype-status">
-    <span class="status-dot"></span><div><strong>Prototype Ready</strong>
-        <small>Retinal screening</small></div>
-    </div><div class="sidebar-meta"><span>ODIR-5K</span>
-        <span>8 classes</span></div></div>
 </aside>
 
 <main class="main">
 <section id="homePage" class="page home-page">
 <div class="home-background"></div><div class="home-background-overlay"></div>
 <div class="home-content">
-<div class="home-copy"><div class="eyebrow"><i class="fa-solid fa-shield-heart"></i> RETINAL AI SCREENING</div>
+<div class="home-copy">
 <h1>AI Clinical Decision<br><span>Support for Retinal Care</span></h1>
 <p>Patient-level retinal screening using left and right fundus images across eight ocular disease classes.</p>
 </div>
-<div class="supported-header"><div><span>SUPPORTED CONDITIONS</span><h2>Retinal disease classes</h2></div><small>8-class prototype</small></div>
+<div class="supported-header"><div><h2>Retinal disease classes</h2></div></div>
 <div class="disease-grid">
-<div class="disease-card"><img src="static/43_left.jpg"><div><strong>AMD</strong><small>Age-related macular degeneration</small></div></div>
-<div class="disease-card"><img src="static/24_left.jpg"><div><strong>Cataract</strong><small>Cataract</small></div></div>
-<div class="disease-card"><img src="static/2_left.jpg"><div><strong>Diabetic Retinopathy</strong><small>Diabetic retinopathy</small></div></div>
-<div class="disease-card"><img src="static/167_left.jpg"><div><strong>Glaucoma</strong><small>Glaucoma</small></div></div>
-<div class="disease-card"><img src="static/28_left.jpg
-  "><div><strong>Hypertension</strong><small>Hypertensive retinal changes</small></div></div>
-<div class="disease-card"><img src="static/18_left.jpg"><div><strong>Myopia</strong><small>Myopia</small></div></div>
-<div class="disease-card"><img src="static/0_left.jpg"><div><strong>Normal</strong><small>No detected retinal abnormality</small></div></div>
-<div class="disease-card"><img src="static/9_left.jpg"><div><strong>Others</strong><small>Other retinal findings</small></div></div>
+<div class="disease-card"><img src="static/43_left.jpg"><div><strong>AMD</strong>
+    <small>Age-related macular degeneration</small></div></div>
+<div class="disease-card"><img src="static/24_left.jpg"><div><strong>Cataract</strong>
+    <small>Cataract</small></div></div>
+<div class="disease-card"><img src="static/2_left.jpg"><div><strong>Diabetic Retinopathy</strong>
+    <small>Diabetic retinopathy</small></div></div>
+<div class="disease-card"><img src="static/167_left.jpg"><div><strong>Glaucoma</strong>
+    <small>Glaucoma</small></div></div>
+<div class="disease-card"><img src="static/28_left.jpg"><div><strong>Hypertension</strong>
+    <small>Hypertensive retinal changes</small></div></div>
+<div class="disease-card"><img src="static/18_left.jpg"><div><strong>Myopia</strong>
+    <small>Myopia</small></div></div>
+<div class="disease-card"><img src="static/0_left.jpg"><div><strong>Normal</strong>
+    <small>No detected retinal abnormality</small></div></div>
+<div class="disease-card"><img src="static/9_left.jpg"><div><strong>Others</strong>
+    <small>Other retinal findings</small></div></div>
 </div>
-<div class="disclaimer"><i class="fa-solid fa-circle-info"></i> Research prototype for academic use. Results are not a medical diagnosis.</div>
 </div>
 </section>
 
 <section id="dashboardPage" class="page workspace-page hidden">
-<header class="page-header"><div><span class="kicker">DASHBOARD</span><h1>Patient Retinal Analysis</h1><p>Upload the left and right fundus images of the same patient to begin analysis.</p></div><div class="ready-status"><span></span> System ready</div></header>
+<header class="page-header"><div><span class="kicker">DASHBOARD</span><h1>Patient Retinal Analysis</h1><p>Upload the left and right fundus images of the same patient to begin analysis.</p></div>
+</header>
 <div class="workspace-grid"><div class="analysis-area">
 
 <section id="uploadPanel" class="panel">
 <div class="panel-title"><div><span class="mini-label">STEP 01</span><h2>Upload Patient Images</h2></div><i class="fa-solid fa-cloud-arrow-up title-icon"></i></div>
 <div class="eye-upload-grid">
-<label class="eye-upload-zone"><input id="leftInput" type="file" accept=".jpg,.jpeg,.png"><div class="upload-icon"><i class="fa-regular fa-eye"></i></div><strong>Left Eye</strong><span id="leftLabel">Select left-eye fundus image</span></label>
-<label class="eye-upload-zone"><input id="rightInput" type="file" accept=".jpg,.jpeg,.png"><div class="upload-icon"><i class="fa-regular fa-eye"></i></div><strong>Right Eye</strong><span id="rightLabel">Select right-eye fundus image</span></label>
+<label class="eye-upload-zone"><input id="leftInput" type="file" accept=".jpg,.jpeg,.png"><div class="upload-icon"></div><strong>Left Eye</strong><span id="leftLabel">Select left-eye fundus image</span></label>
+<label class="eye-upload-zone"><input id="rightInput" type="file" accept=".jpg,.jpeg,.png"><div class="upload-icon"></div><strong>Right Eye</strong><span id="rightLabel">Select right-eye fundus image</span></label>
 </div>
-<div class="patient-note"><i class="fa-solid fa-circle-info"></i><span>Upload the left and right retinal images of <strong>one patient</strong>.</span></div>
+<div class="patient-note">
+    <span>Upload the left and right retinal images of <strong>one patient</strong>.</span></div>
 </section>
 
 <section id="selectedPanel" class="panel hidden">
-<div class="panel-title"><div><span class="mini-label">STEP 02</span><h2>Patient Images Ready</h2></div><span class="ready-badge"><i class="fa-solid fa-check"></i> Both images selected</span></div>
+<div class="panel-title"><div><span class="mini-label">STEP 02</span><h2>Patient Images Ready</h2></div><span class="ready-badge">Both images selected</span></div>
 <div class="selected-files">
-<div class="selected-file"><div class="file-icon"><i class="fa-regular fa-eye"></i></div><div class="file-text"><span class="mini-label">LEFT EYE</span><strong id="leftName">—</strong></div></div>
-<div class="selected-file"><div class="file-icon"><i class="fa-regular fa-eye"></i></div><div class="file-text"><span class="mini-label">RIGHT EYE</span><strong id="rightName">—</strong></div></div>
+<div class="selected-file"><div class="file-icon"></div><div class="file-text"><span class="mini-label">LEFT EYE</span><strong id="leftName">—</strong></div></div>
+<div class="selected-file"><div class="file-icon"></div><div class="file-text"><span class="mini-label">RIGHT EYE</span><strong id="rightName">—</strong></div></div>
 </div>
-<button id="analyzeButton" class="primary-button full-button" disabled><i class="fa-solid fa-microscope"></i> Analyze Patient Images</button>
+<button id="analyzeButton" class="primary-button full-button" disabled>Analyze Patient Images</button>
 </section>
 
 <!-- =====================================================
@@ -117,7 +120,6 @@
                 </span>
 
                 <h3>
-                    <i class="fa-regular fa-eye"></i>
                     Left Eye
                 </h3>
             </div>
@@ -187,7 +189,6 @@
                     </span>
 
                     <h3>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
                         Left Eye Details
                     </h3>
 
@@ -198,8 +199,7 @@
 
             <div
                 id="leftMedicalReport"
-                class="medical-report"
-            >
+                class="medical-report">
                 Generating medical information...
             </div>
 
@@ -223,7 +223,6 @@
                 </span>
 
                 <h3>
-                    <i class="fa-regular fa-eye"></i>
                     Right Eye
                 </h3>
 
@@ -294,7 +293,6 @@
                     </span>
 
                     <h3>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
                         Right Eye Details
                     </h3>
 
@@ -315,13 +313,9 @@
     </div>
 
 
-    <!-- =================================================
-         DISCLAIMER
-         ================================================= -->
+    <!-- DISCLAIMER -->
 
     <div class="prototype-note">
-
-        <i class="fa-solid fa-circle-info"></i>
 
         <span>
             Research prototype for educational purposes.
@@ -333,9 +327,8 @@
 </section>
 
 
-<!-- =====================================================
-     BOTTOM BUTTONS
-     ===================================================== -->
+
+     <!-- BOTTOM BUTTONS -->
 
 <section
     id="bottomActions"
@@ -344,10 +337,8 @@
 
     <button
         id="newPredictionButton"
-        class="secondary-button"
-    >
+        class="secondary-button">
 
-        <i class="fa-solid fa-rotate"></i>
 
         New Prediction
 
@@ -356,10 +347,8 @@
 
     <button
         id="askQuestionButton"
-        class="primary-button"
-    >
+        class="primary-button">
 
-        <i class="fa-regular fa-comments"></i>
 
         Ask About This Prediction
 
@@ -368,37 +357,21 @@
 </section>
 
 
-<!-- =====================================================
-     ASK QUESTION
-     ===================================================== -->
+<!-- ASK QUESTION -->
 
 <section
     id="chatPanel"
-    class="panel chat-panel hidden"
->
+    class="panel chat-panel hidden">
 
     <div class="panel-title">
 
-        <div>
-
-            <span class="mini-label">
-                RAG + LLM
-            </span>
-
-            <h2>
-                Ask About This Prediction
-            </h2>
-
-        </div>
+    
 
 
         <button
             id="closeChat"
             class="close-chat"
-            type="button"
-        >
-
-            <i class="fa-solid fa-xmark"></i>
+            type="button">
 
         </button>
 
@@ -439,30 +412,19 @@
 
     <!-- Question -->
 
-    <label
-        for="questionInput"
-        class="question-label"
-    >
-        Ask a question about this prediction
-    </label>
-
 
     <div class="question-row">
 
         <input
             id="questionInput"
             type="text"
-            placeholder="e.g. What are the common symptoms?"
-        >
+            placeholder="e.g. What are the common symptoms?">
 
 
         <button
             id="sendQuestionButton"
             class="primary-button"
-            type="button"
-        >
-
-            <i class="fa-solid fa-paper-plane"></i>
+            type="button">
 
             Send
 
@@ -473,34 +435,26 @@
 
     <!-- Answer -->
 
-    <div
-        id="chatAnswerBox"
-        class="chat-answer hidden"
-    >
-
-        <div class="chat-answer-title">
-
-            <i class="fa-solid fa-robot"></i>
-
-            AI Answer
-
-        </div>
-
-
-        <div id="chatAnswer"></div>
-
+    <div id="chatAnswerBox" class="chat-answer hidden">
+    <div class="chat-answer-title">
+        Question History
     </div>
+
+    <div id="chatHistory" class="chat-history"></div>
+   </div>
 
 </section>
 
+</div> 
 
 <aside class="image-viewer-column"><section class="panel viewer-panel">
-<div class="panel-title"><div><span class="mini-label">IMAGE VIEWER</span><h2>Patient Fundus Images</h2></div><span id="viewerState" class="viewer-state">Waiting</span></div>
-<div class="dual-viewer">
-<div class="eye-view"><span>LEFT EYE</span><div id="leftEmpty" class="viewer-empty"><i class="fa-regular fa-eye"></i><strong>No image</strong></div><img id="leftPreview" class="hidden" alt="Left eye preview"></div>
-<div class="eye-view"><span>RIGHT EYE</span><div id="rightEmpty" class="viewer-empty"><i class="fa-regular fa-eye"></i><strong>No image</strong></div><img id="rightPreview" class="hidden" alt="Right eye preview"></div>
+<div class="panel-title"><div><span class="mini-label">IMAGE VIEWER</span><h2>Patient Fundus Images</h2></div>
 </div>
-<div class="viewer-footer"><span><i class="fa-solid fa-lock"></i> Local prototype</span><span>Same patient</span></div>
+<div class="dual-viewer">
+<div class="eye-view"><span>LEFT EYE</span><div id="leftEmpty" class="viewer-empty"><strong>No image</strong></div><img id="leftPreview" class="hidden" alt="Left eye preview"></div>
+<div class="eye-view"><span>RIGHT EYE</span><div id="rightEmpty" class="viewer-empty"><strong>No image</strong></div><img id="rightPreview" class="hidden" alt="Right eye preview"></div>
+</div>
+<div class="viewer-footer"></div>
 </section></aside>
 </div>
 </section>

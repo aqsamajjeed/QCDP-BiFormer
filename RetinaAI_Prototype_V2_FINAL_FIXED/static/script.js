@@ -1,12 +1,19 @@
 const homePage=document.getElementById("homePage"),dashboardPage=document.getElementById("dashboardPage");
 const navItems=document.querySelectorAll(".nav-item");
-function showPage(name){homePage.classList.toggle("hidden",name!=="home");dashboardPage.classList.toggle("hidden",name!=="dashboard");navItems.forEach(n=>n.classList.toggle("active",n.dataset.page===name));window.scrollTo({top:0,behavior:"smooth"});}
+function showPage(name)
+{
+    homePage.classList.toggle("hidden",name!=="home");
+    dashboardPage.classList.toggle("hidden",name!=="dashboard");
+    navItems.forEach(n=>n.classList.toggle("active",n.dataset.page===name));
+    window.scrollTo({top:0,behavior:"smooth"});
+}
 navItems.forEach(n=>n.addEventListener("click",()=>showPage(n.dataset.page)));
 
 
 const classes=["AMD","Cataract","Diabetic Retinopathy","Glaucoma","Hypertension","Myopia","Normal","Others"];
 
-function renderProbabilities(values, containerId){
+function renderProbabilities(values, containerId)
+{
 
     const box = document.getElementById(containerId);
 
@@ -55,9 +62,10 @@ function loadPreview(file,side){
   document.getElementById(side+"Label").textContent=file.name;
   document.getElementById(side+"Name").textContent=file.name;
   if(side==="left")leftFile=file;else rightFile=file;
-  document.getElementById("viewerState").textContent="Images ready";
-  document.getElementById("viewerState").classList.add("ready");
-  if(leftFile&&rightFile){document.getElementById("selectedPanel").classList.remove("hidden");document.getElementById("analyzeButton").disabled=false;}
+  if(leftFile&&rightFile)
+    {
+        document.getElementById("selectedPanel").classList.remove("hidden");document.getElementById("analyzeButton").disabled=false;
+    }
  };
  r.readAsDataURL(file);
 }
@@ -69,60 +77,137 @@ function formatMedicalReport(text) {
     if (!text) {
         return "Medical explanation is currently unavailable.";
     }
+    
+    
+    // Clean up the text
+    let raw = String(text)
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .replace(/```json/g, "")
+    .replace(/```/g, "")
+    .trim();
+    
+    // If text is very short or doesn't have markdown, just return it as is
+   if (raw.length < 50 || !raw.includes('\n')) {
+       //  convert any asterisks to italic
+       raw = raw.replace(/\*(.*?)\*/g, "<em>$1</em>");
+       return `<p>${raw}</p>`;
+   }
+    // Step 1: Fix headings - look for heading patterns and convert to proper ### format
+    const headings = {
+        "what it is": "### What it is",
+        "symptoms / signs": "### Symptoms / Signs",
+        "risk factors": "### Risk Factors",
+        "detection": "### Detection",
+        "general management": "### General Management",
+        "important note": "### Important Note",
+        "summary": "### Summary",
+        "conclusion": "### Conclusion"
+    };
 
-    let html = String(text)
-        .replace(/\r\n/g, "\n")
-        .replace(/\r/g, "\n")
-        .trim();
+    // Add newlines before each heading and convert to proper format
+    Object.keys(headings).forEach(key => {
+        const regex = new RegExp(`(?:(?:^|\\n)\\s*)(?:#{2,5}\\s*)?(?:${key})(?:\\s*:)?(?!\\w)`, "gi");
+        raw = raw.replace(regex, `\n\n${headings[key]}\n\n`);
+    });
 
-    // Remove horizontal separators
-    html = html.replace(/^\s*---+\s*$/gm, "");
+    // Step 2: Fix bullet points - ensure they start with "- "
+    // Any line that starts with *, •, or - followed by space becomes "- "
+    raw = raw.replace(/^[\s]*[\*•]\s+/gm, "- ");
+    // Also convert numbered lists to bullet points
+    raw = raw.replace(/^[\s]*\d+\.\s+/gm, "- ");
+    // Fix bullets that are crammed in the middle of text
+    raw = raw.replace(/([a-zA-Z0-9])\s+[-*•]\s+/g, "$1\n- ");
 
-    // Escape HTML
-    html = html
+    // Step 3: Clean up extra spacing
+    raw = raw.replace(/\n{3,}/g, "\n\n");
+    raw = raw.trim();
+
+    // Step 4: Convert markdown to HTML
+    // First, escape HTML characters
+    raw = raw
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    // Bold
-    html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    //  Convert italic FIRST (single asterisks)
+    raw = raw.replace(/\*(.*?)\*/g, "<em>$1</em>");    
+    // Convert bold text
+    raw = raw.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-    // H3 / H4 / H5
-    html = html.replace(
-        /^###\s+(.*?)$/gm,
-        '<h3>$1</h3>'
-    );
+    // Convert headings (### Title) to HTML
+    raw = raw.replace(/^###\s+(.+)$/gm, "<h3>$1</h3>");
 
-    html = html.replace(
-        /^####\s+(.*?)$/gm,
-        '<h4>$1</h4>'
-    );
+    // Convert bullet points to HTML list
+    // First, find all bullet point sections and wrap them in <ul>
+    const lines = raw.split("\n");
+    let result = [];
+    let inList = false;
+    let listItems = [];
 
-    html = html.replace(
-        /^#####\s+(.*?)$/gm,
-        '<h5>$1</h5>'
-    );
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        
+        if (!line) {
+            // Empty line - close list if we're in one
+            if (inList) {
+                result.push(`<ul>${listItems.join("")}</ul>`);
+                listItems = [];
+                inList = false;
+            }
+            result.push(""); // Keep empty line
+            continue;
+        }
 
-    // Bullet lists
-    html = html.replace(
-        /^\s*[\*\-]\s+(.*?)$/gm,
-        "<li>$1</li>"
-    );
+        // Check if line starts with "- "
+        if (line.startsWith("- ")) {
+            const itemText = line.substring(2);
+            if (!inList) {
+                // Start new list
+                if (result.length > 0 && result[result.length - 1] !== "") {
+                    result.push(""); // Add spacing before list
+                }
+                inList = true;
+                listItems = [];
+            }
+            listItems.push(`<li>${itemText}</li>`);
+        } else {
+            // Not a bullet point - close list if we were in one
+            if (inList) {
+                result.push(`<ul>${listItems.join("")}</ul>`);
+                listItems = [];
+                inList = false;
+            }
+            // Check if this line is a heading (already converted to <h3>)
+            if (line.startsWith("<h3>") || line.startsWith("<strong>")) {
+                result.push(line);
+            } else {
+                // Regular text - wrap in paragraph
+                result.push(`<p>${line}</p>`);
+            }
+        }
+    }
 
-    // Group consecutive li elements
-    html = html.replace(
-        /(<li>.*?<\/li>\s*)+/gs,
-        match => `<ul>${match}</ul>`
-    );
+    // Close any open list
+    if (inList) {
+        result.push(`<ul>${listItems.join("")}</ul>`);
+    }
 
-    // Remove remaining single markdown emphasis
-    html = html.replace(/\*(.*?)\*/g, "$1");
+    // Step 5: Join everything and clean up
+    let html = result.join("\n");
 
-    // Convert remaining new lines
-    html = html.replace(/\n{2,}/g, "<br><br>");
-    html = html.replace(/\n/g, "<br>");
+    // Remove empty paragraphs
+    html = html.replace(/<p>\s*<\/p>/g, "");
+    
+    // Remove extra line breaks between elements
+    html = html.replace(/\n{2,}/g, "\n");
+    
+    // Ensure proper spacing between elements
+    html = html.replace(/<\/h3>\n/g, "</h3>");
+    html = html.replace(/<\/ul>\n/g, "</ul>");
+    html = html.replace(/<\/p>\n/g, "</p>");
 
-    return html;
+    return html.trim();
 }
 
 document.getElementById("analyzeButton").addEventListener("click", async () => {
@@ -134,7 +219,7 @@ document.getElementById("analyzeButton").addEventListener("click", async () => {
     button.disabled = true;
 
     button.innerHTML =
-        '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing Patient...';
+        'Analyzing Patient...';
 
 
     const fd = new FormData();
@@ -167,7 +252,7 @@ document.getElementById("analyzeButton").addEventListener("click", async () => {
         }
 
 
-        // LEFT EYE
+        // Left  Eye
 
         document.getElementById(
             "leftResultDisease"
@@ -183,7 +268,7 @@ document.getElementById("analyzeButton").addEventListener("click", async () => {
             ).toFixed(1) + "%";
 
 
-        // RIGHT EYE
+        // Right Eye
 
         document.getElementById(
             "rightResultDisease"
@@ -198,7 +283,7 @@ document.getElementById("analyzeButton").addEventListener("click", async () => {
                 data.right.confidence
             ).toFixed(1) + "%";
 
-        // UPDATE CHAT PREDICTION SUMMARY
+        // Update Chat Prediction Summary
 
     document.getElementById("chatLeftPrediction").textContent =
     data.left.disease;
@@ -259,7 +344,7 @@ document.getElementById("rightMedicalReport").innerHTML =
 
 
         button.innerHTML =
-            '<i class="fa-solid fa-check"></i> Analysis Complete';
+            'Analysis Complete';
 
 
         document.getElementById(
@@ -277,25 +362,31 @@ document.getElementById("rightMedicalReport").innerHTML =
         button.disabled = false;
 
         button.innerHTML =
-            '<i class="fa-solid fa-microscope"></i> Analyze Patient Images';
+            'Analyze Patient Images';
 
     }
 
 });
 
-document.getElementById("newPredictionButton").addEventListener("click",()=>{
+document.getElementById("newPredictionButton").addEventListener("click",()=>
+    {
  leftFile=null;rightFile=null;
  ["leftInput","rightInput"].forEach(id=>document.getElementById(id).value="");
- ["leftPreview","rightPreview"].forEach(id=>{document.getElementById(id).src="";document.getElementById(id).classList.add("hidden");});
+ ["leftPreview","rightPreview"].forEach(id=>{document.getElementById(id).src="";
+    document.getElementById(id).classList.add("hidden");});
  ["leftEmpty","rightEmpty"].forEach(id=>document.getElementById(id).classList.remove("hidden"));
  document.getElementById("leftLabel").textContent="Select left-eye fundus image";
  document.getElementById("rightLabel").textContent="Select right-eye fundus image";
- document.getElementById("leftName").textContent="—";document.getElementById("rightName").textContent="—";
- document.getElementById("viewerState").textContent="Waiting";document.getElementById("viewerState").classList.remove("ready");
- document.getElementById("resultPanel").classList.add("hidden");document.getElementById("selectedPanel").classList.add("hidden");
- document.getElementById("bottomActions").classList.add("hidden");document.getElementById("chatPanel").classList.add("hidden");
+ document.getElementById("leftName").textContent="—";
+ document.getElementById("rightName").textContent="—";
+ document.getElementById("resultPanel").classList.add("hidden");
+ document.getElementById("selectedPanel").classList.add("hidden");
+ document.getElementById("bottomActions").classList.add("hidden");
+ document.getElementById("chatPanel").classList.add("hidden");
+ document.getElementById("chatHistory").innerHTML = "";
  document.getElementById("uploadPanel").classList.remove("hidden");
- const b=document.getElementById("analyzeButton");b.disabled=true;b.innerHTML='<i class="fa-solid fa-microscope"></i> Analyze Patient Images';
+ const b=document.getElementById("analyzeButton");b.disabled=true;
+ b.innerHTML='Analyze Patient Images';
  window.scrollTo({top:0,behavior:"smooth"});
 });
 
@@ -307,12 +398,20 @@ document.getElementById("closeChat").addEventListener("click",()=>document.getEl
 
 document.getElementById("sendQuestionButton").addEventListener("click", async () => {
 
-    const questionInput = document.getElementById("questionInput");
-    const sendButton = document.getElementById("sendQuestionButton");
-    const answerBox = document.getElementById("chatAnswerBox");
-    const answer = document.getElementById("chatAnswer");
+    const questionInput =
+        document.getElementById("questionInput");
 
-    const question = questionInput.value.trim();
+    const sendButton =
+        document.getElementById("sendQuestionButton");
+
+    const answerBox =
+        document.getElementById("chatAnswerBox");
+
+    const history =
+        document.getElementById("chatHistory");
+
+    const question =
+        questionInput.value.trim();
 
     if (!question) {
         alert("Please enter a question.");
@@ -320,61 +419,112 @@ document.getElementById("sendQuestionButton").addEventListener("click", async ()
     }
 
     const leftPrediction =
-        document.getElementById("chatLeftPrediction").textContent.trim();
+        document.getElementById("chatLeftPrediction")
+        .textContent.trim();
 
     const rightPrediction =
-        document.getElementById("chatRightPrediction").textContent.trim();
+        document.getElementById("chatRightPrediction")
+        .textContent.trim();
 
     sendButton.disabled = true;
 
     sendButton.innerHTML =
-        '<i class="fa-solid fa-spinner fa-spin"></i> Asking...';
+        'Asking...';
 
     answerBox.classList.remove("hidden");
 
-    answer.innerHTML = "Generating answer...";
+    /* Create a new history item */
+    const historyItem =
+        document.createElement("div");
+
+    historyItem.className =
+        "chat-history-item";
+
+    historyItem.innerHTML = `
+        <div class="chat-history-question">
+            ${escapeHtml(question)}
+        </div>
+
+        <div class="chat-history-answer">
+            Generating answer...
+        </div>
+    `;
+
+    history.appendChild(historyItem);
+
+    /* Move the newest question into view */
+    historyItem.scrollIntoView(
+        {
+        behavior: "smooth",
+        block: "nearest"
+    });
+
+    const answer =
+        historyItem.querySelector(
+            ".chat-history-answer"
+        );
 
     try {
 
-        const response = await fetch("/ask", {
-            method: "POST",
+        const response = await fetch("/ask",
+            {
+            method:"POST",
 
-            headers: {
-                "Content-Type": "application/json"
+            headers:{
+                "Content-Type":"application/json"
             },
 
-            body: JSON.stringify({
-                left_prediction: leftPrediction,
-                right_prediction: rightPrediction,
-                question: question
+            body:JSON.stringify(
+            {
+                left_prediction:leftPrediction,
+                right_prediction:rightPrediction,
+                question:question
             })
         });
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
         if (!response.ok) {
             throw new Error(
-                data.error || "Unable to get answer."
+                data.error ||
+                "Unable to get answer."
             );
         }
 
-        answer.innerHTML = formatMedicalReport(
-            data.answer || "No answer was returned."
-        );
+        answer.innerHTML =
+            formatMedicalReport(
+                data.answer ||
+                "No answer was returned."
+            );
+
+        /* Clear input for the next question */
+        questionInput.value = "";
 
     } catch (error) {
 
-        console.error("Question error:", error);
+        console.error(
+            "Question error:",
+            error
+        );
 
         answer.innerHTML =
-            `<strong>Error:</strong> ${error.message}`;
+            `<strong>Error:</strong> ${escapeHtml(error.message)}`;
 
     } finally {
 
-        // Re-enable Send button
         sendButton.disabled = false;
 
         sendButton.innerHTML =
-            '<i class="fa-solid fa-paper-plane"></i> Send';
+            '</i> Send';
     }
 });
+
+function escapeHtml(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
