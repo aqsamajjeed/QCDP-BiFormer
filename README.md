@@ -34,4 +34,4 @@ AMD · Cataract · Diabetic Retinopathy · Glaucoma · Hypertension · Myopia ·
 
 ### Status
 
-🚧 **Research in progress** — quality assessment, feature extraction, and disease prototype memory have been implemented. Remaining components are currently being integrated.
+🚧 **Currently in progress** — quality assessment, feature extraction, and disease prototype memory have been implemented. Remaining components are currently being integrated.
