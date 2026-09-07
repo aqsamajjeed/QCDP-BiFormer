@@ -21,7 +21,7 @@ The project uses the **ODIR-5K (Ocular Disease Intelligent Recognition)** datase
 
 🚧 **Work in Progress**
 
-This repository contains the ongoing implementation and experimentation associated with the research project. Detailed methodology and architectural components are intentionally not disclosed at this stage as the research is currently under development.
+This repository contains the ongoing implementation and experimentation associated with the project. Work is currently under development.
 
 ## Tech Stack
 
