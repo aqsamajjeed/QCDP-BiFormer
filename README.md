@@ -1,6 +1,6 @@
 # QCDP-BiFormer
 
-## Multi-Label Eye Disease Classification from Retinal Fundus Images
+## Multi-Label Multi Class Eye Disease Classification from Retinal Fundus Images
 
 QCDP-BiFormer is an ongoing project focused on improving automated multi-label eye disease classification using retinal fundus images.
 
