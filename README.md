@@ -6,7 +6,7 @@ QCDP-BiFormer is an ongoing project focused on improving automated multi-label e
 
 Eye disease diagnosis from fundus images presents several challenges, including variations in image quality, overlapping disease characteristics, class imbalance, and the possibility of multiple ocular conditions occurring simultaneously. This research investigates approaches to developing more robust and reliable deep learning models for addressing these challenges.
 
-The project uses the **ODIR-5K (Ocular Disease Intelligent Recognition)** dataset and focuses on the classification of multiple ocular conditions, including:
+The project uses the **ODIR-5K (Ocular Disease Intelligent Recognition)** dataset and focuses on the classification of *multiple ocular conditions*, including:
 
 * Age-related Macular Degeneration (AMD)
 * Cataract
