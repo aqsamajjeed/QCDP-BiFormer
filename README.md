@@ -25,5 +25,9 @@ This repository contains the ongoing implementation and experimentation associat
 
 ## Tech Stack
 
-Python • PyTorch • Deep Learning • Computer Vision • Medical Imaging
+• Python 
+• PyTorch 
+• Deep Learning 
+• Computer Vision 
+• Medical Imaging
 
