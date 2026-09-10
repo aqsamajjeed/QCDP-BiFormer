@@ -19,7 +19,7 @@ The project uses the **ODIR-5K ** dataset and focuses on the classification of *
 
 ##  Status
 
-🚧 **Work in Progress**
+ **Work in Progress**
 
 This repository contains the ongoing implementation and experimentation associated with the project. Work is currently under development.
 
